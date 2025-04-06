@@ -38,6 +38,8 @@ FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 WORKDIR "/src/Oqtane.Server"
 RUN dotnet publish "./Oqtane.Server.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+WORKDIR "/src/Oqtane.Database.MySQL"
+RUN dotnet publish "./Oqtane.Database.MySQL.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
